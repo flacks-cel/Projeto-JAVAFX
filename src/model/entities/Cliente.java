@@ -11,7 +11,6 @@ public class Cliente implements Serializable{
 	private String projeto;
 	
 	public Cliente() {
-		
 	}
 
 	public Cliente(Integer id, String empresa, String projeto) {
@@ -73,5 +72,7 @@ public class Cliente implements Serializable{
 	public String toString() {
 		return "Cliente [id=" + id + ", empresa=" + empresa + ", projeto=" + projeto + "]";
 	}
+	
+	
 
 }
