@@ -9,8 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
-<VBox prefHeight="377.0" prefWidth="518.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/10.0.1">
+<VBox prefHeight="377.0" prefWidth="518.0" xmlns="http://javafx.com/javafx/10.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ClienteListController">
    <children>
       <Label text="Registro do Cliente">
          <font>
@@ -22,18 +21,18 @@
       </Label>
       <ToolBar prefHeight="40.0" prefWidth="200.0">
         <items>
-          <Button mnemonicParsing="false" text="Novo" textFill="#3910dd">
+          <Button fx:id="btNovo" mnemonicParsing="false" onAction="#onBtNovoAction" text="Novo" textFill="#3910dd">
                <font>
                   <Font name="System Bold Italic" size="13.0" />
                </font>
             </Button>
         </items>
       </ToolBar>
-      <TableView prefHeight="200.0" prefWidth="200.0">
+      <TableView fx:id="tableViewCliente" prefHeight="200.0" prefWidth="200.0">
         <columns>
-          <TableColumn prefWidth="75.0" text="Id" />
-          <TableColumn prefWidth="75.0" text="Empresa" />
-            <TableColumn prefWidth="75.0" text="Projeto" />
+          <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="Id" />
+          <TableColumn fx:id="tableColumnEmpresa" prefWidth="75.0" text="Empresa" />
+            <TableColumn fx:id="tableColumnProjeto" prefWidth="75.0" text="Projeto" />
         </columns>
       </TableView>
    </children>
