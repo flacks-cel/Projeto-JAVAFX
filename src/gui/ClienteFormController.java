@@ -9,8 +9,11 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import model.entities.Cliente;
 
 public class ClienteFormController implements Initializable {
+	
+	private Cliente entity;
 
 	@FXML
 	private TextField txtId;
@@ -32,6 +35,10 @@ public class ClienteFormController implements Initializable {
 
 	@FXML
 	private Button btCancelar;
+	
+	public void setCliente(Cliente entity) {
+		this.entity = entity;
+	}
 
 	@FXML
 	public void onBtSalvarAction() {
@@ -53,6 +60,15 @@ public class ClienteFormController implements Initializable {
 		Constraints.setTextFieldInteger(txtId);
 		Constraints.setTextFieldMaxLength(txtEmpresa, 40);
 		Constraints.setTextFieldMaxLength(txtProjeto, 40);
+	}
+	
+	public void updateFormData() {
+		if(entity == null) {
+			throw new IllegalStateException("Entity está vazia");
+		}
+		txtId.setText(String.valueOf(entity.getId()));
+		txtEmpresa.setText(entity.getEmpresa());
+		txtProjeto.setText(entity.getProjeto());
 	}
 
 }

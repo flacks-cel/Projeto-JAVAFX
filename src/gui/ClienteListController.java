@@ -52,7 +52,8 @@ public class ClienteListController implements Initializable{
 	@FXML
 	public void onBtNovoAction(ActionEvent evento) {
 		Stage parentStage = Utils.atualStage(evento);
-		criaDialogoFormu("/gui/ClienteForm.fxml", parentStage);
+		Cliente obj = new Cliente();
+		criaDialogoFormu(obj, "/gui/ClienteForm.fxml", parentStage);
 	}
 	
 	private ObservableList<Cliente> obsList;
@@ -83,10 +84,14 @@ public class ClienteListController implements Initializable{
 		tableViewCliente.setItems(obsList);
 	}
 	
-	private void criaDialogoFormu(String absoluteName, Stage parentStage) {
+	private void criaDialogoFormu(Cliente obj, String absoluteName, Stage parentStage) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
 			Pane pane = loader.load();
+			
+			ClienteFormController controller = loader.getController();
+			controller.setCliente(obj);
+			controller.updateFormData();
 			
 			Stage dialogoStage = new Stage();
 			dialogoStage.setTitle("Insira os dados do cliente");
