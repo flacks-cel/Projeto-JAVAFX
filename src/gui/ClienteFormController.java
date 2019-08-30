@@ -1,9 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import db.DbException;
+import gui.listeners.DataChangeListener;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import gui.util.Utils;
@@ -22,6 +25,8 @@ public class ClienteFormController implements Initializable {
 	private Cliente entity;
 	
 	private ClienteService service;
+	
+	private List<DataChangeListener> dataChangeListeners = new ArrayList<>();
 
 	@FXML
 	private TextField txtId;
@@ -50,6 +55,9 @@ public class ClienteFormController implements Initializable {
 	public void setClienteService(ClienteService service) {
 		this.service = service;
 	}
+	public void subscribeDataChangeListener(DataChangeListener listener) {
+		dataChangeListeners.add(listener);
+	}
 
 	@FXML
 	public void onBtSalvarAction(ActionEvent event) {
@@ -62,6 +70,7 @@ public class ClienteFormController implements Initializable {
 		try {
 			entity = getFormData();
 			service.saveOrUpdate(entity);
+			notifyDataChangeListeners();
 			Utils.atualStage(event).close();
 		}
 		catch(DbException e) {
@@ -69,6 +78,12 @@ public class ClienteFormController implements Initializable {
 		}
 	}
 
+	private void notifyDataChangeListeners() {
+		for(DataChangeListener listener : dataChangeListeners) {
+			listener.onDataChanged();
+		}
+		
+	}
 	private Cliente getFormData() {
 		Cliente obj = new Cliente();
 		
