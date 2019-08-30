@@ -14,5 +14,14 @@ public class ClienteService {
 	public List<Cliente> findAll(){
 		return dao.findAll();
 	}
+	
+	public void saveOrUpdate(Cliente obj) {
+		if(obj.getId() == null) {
+			dao.insert(obj);
+		}
+		else {
+			dao.update(obj);
+		}
+	}
 
 }
